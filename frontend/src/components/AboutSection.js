@@ -134,18 +134,23 @@ const SobreMiModal = () => (
   <div className="space-y-4" data-testid="sobre-mi-modal">
     <h3 className="font-heading text-2xl font-bold">Sobre mí</h3>
     <p className="text-text-secondary leading-relaxed">
-      Mi nombre es <strong className="text-text-primary">Hector Aaron Leija Zavala</strong>.
-      Soy una persona curiosa, me gusta aprender cosas nuevas,
-      especialmente relacionadas con la tecnología y los videojuegos.
+      Mi nombre es{" "}
+      <strong className="text-text-primary">
+        Héctor Aarón Leija Zavala
+      </strong>
+      . Soy una persona curiosa a la que le gusta aprender cosas nuevas,
+      especialmente en temas relacionados con la tecnología y los
+      videojuegos.
     </p>
     <p className="text-text-secondary leading-relaxed">
-      En mi tiempo libre disfruto jugar videojuegos, deportes especialmente
-      el voleibol (me considero un poco adicto a ese deporte), escuchar música,
-      aprender programación y mejorar mis habilidades poco a poco.
+      En mi tiempo libre disfruto jugar videojuegos y practicar deportes,
+      en especial voleibol, un deporte que realmente me apasiona. También me
+      gusta escuchar música, aprender programación y trabajar constantemente
+      en mejorar mis habilidades.
     </p>
     <p className="text-text-secondary leading-relaxed">
-      Me considero alguien responsable, creativo y con muchas ganas
-      de crecer tanto personal como profesionalmente.
+      Me considero una persona responsable y creativa, con muchas ganas de
+      seguir creciendo tanto en lo personal como en lo profesional.
     </p>
   </div>
 );
