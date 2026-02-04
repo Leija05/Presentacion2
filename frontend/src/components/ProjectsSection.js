@@ -11,7 +11,8 @@ export const ProjectsSection = ({ openModal }) => {
       tech: ['HTML', 'CSS', 'JavaScript'],
       video: '/videos/Restaurant.mp4',
       image: '/img/RestaurantProyect.png',
-      link: 'https://leija05.github.io/Restaurant/#gallery',
+      linkDownload: 'https://github.com/Leija05/Restaurant',
+      linkView:'https://leija05.github.io/Restaurant/#gallery',
     },
     {
       id: 'panaderia',
@@ -20,7 +21,8 @@ export const ProjectsSection = ({ openModal }) => {
       tech: ['HTML', 'CSS', 'JS', 'Node', 'Electron', 'SQLite'],
       video: '/videos/Panaderia.mp4',
       image: '/img/PanaderiaElectron.png',
-      link: 'https://github.com/Leija05/PanaderiaElectron.git',
+      linkDownload: 'https://github.com/Leija05/PanaderiaElectron/releases',
+      linkView:'https://github.com/Leija05/PanaderiaElectron',
     },
     {
       id: 'jodify',
@@ -29,7 +31,8 @@ export const ProjectsSection = ({ openModal }) => {
       tech: ['HTML', 'CSS', 'JS', 'Node', 'Electron', 'Supabase'],
       video: '/videos/Jodify.mp4',
       image: '/img/Jodify.png',
-      link: 'https://github.com/Leija05/jodify/releases',
+      linkDownload: 'https://github.com/Leija05/jodify/releases',
+      linkView:'https://leija05.github.io/jodify/',
     },
   ];
 
@@ -221,7 +224,19 @@ const ProjectModal = ({ project }) => {
       </div>
 
       <motion.a
-        href={project.link}
+        href={project.linkDownload}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-semibold hover:shadow-lg transition-shadow duration-300"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        data-testid="project-link"
+      >
+        <span>Descargar App</span>
+        <ExternalLink size={18} />
+      </motion.a>
+      <motion.a
+        href={project.linkView}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-semibold hover:shadow-lg transition-shadow duration-300"
