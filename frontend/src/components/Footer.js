@@ -85,7 +85,7 @@ export const Footer = () => {
         }
         
         .animate-signature .firma-path {
-          animation: drawSignature 8s ease-out forwards, glowPulse 2s ease-in-out 4s infinite;
+          animation: drawSignature 7s ease-out forwards, glowPulse 2s ease-in-out 4s infinite;
         }
         
         @keyframes drawSignature {
@@ -100,7 +100,7 @@ export const Footer = () => {
             filter: drop-shadow(0 0 8px rgba(123, 44, 191, 0.5));
           }
           50% {
-            filter: drop-shadow(0 0 20px rgba(123, 44, 191, 0.9));
+            filter: drop-shadow(0 0 20px rgba(146, 79, 206, 0.9));
           }
         }
       `}</style>
