@@ -39,6 +39,13 @@ const bentoCards = [
     size: 'col-span-1 row-span-1',
     gradient: 'from-pink-500/20 to-transparent',
   },
+  {
+    id: '',
+    title: '',
+    icon: ,
+    size: 'col-span-1 row-span-1',
+    gradient: 'from-pink-500/20 to-transparent',
+  },
 ];
 
 export const AboutSection = ({ openModal }) => {
