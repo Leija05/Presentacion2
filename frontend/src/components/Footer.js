@@ -1,7 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
-export const Footer = () => {
+const labels = {
+  es: { createdBy: 'Página creada por' },
+  en: { createdBy: 'Page created by' },
+};
+
+export const Footer = ({ language = 'es' }) => {
+  const t = labels[language] || labels.es;
   const firmaRef = useRef(null);
 
   useEffect(() => {
@@ -36,7 +42,7 @@ export const Footer = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <p className="text-text-secondary mb-2">Página creada por</p>
+          <p className="text-text-secondary mb-2">{t.createdBy}</p>
           <p className="font-heading text-2xl font-bold gradient-text">Hector Leija</p>
         </motion.div>
 

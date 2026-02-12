@@ -2,7 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Lightbulb, Palette, Code, CheckCircle } from 'lucide-react';
 
-const steps = [
+const stepsByLanguage = {
+  es: [
   {
     icon: Lightbulb,
     title: 'Análisis',
@@ -31,11 +32,25 @@ const steps = [
     color: 'text-green-500',
     bgColor: 'bg-green-500/10',
   },
-];
+  ],
+  en: [
+  { icon: Lightbulb, title: 'Analysis', description: 'I understand the idea and objective.', color: 'text-yellow-500', bgColor: 'bg-yellow-500/10' },
+  { icon: Palette, title: 'UI Design', description: 'Clean and animated interfaces.', color: 'text-pink-500', bgColor: 'bg-pink-500/10' },
+  { icon: Code, title: 'Development', description: 'Clear and optimized code.', color: 'text-blue-500', bgColor: 'bg-blue-500/10' },
+  { icon: CheckCircle, title: 'Delivery', description: 'Project ready for production.', color: 'text-green-500', bgColor: 'bg-green-500/10' },
+  ],
+};
 
-export const ProcessSection = () => {
+const labels = {
+  es: { title: 'Cómo trabajo', subtitle: 'Mi proceso está enfocado en crear experiencias visuales modernas, funcionales y bien optimizadas.' },
+  en: { title: 'How I work', subtitle: 'My process is focused on creating modern, functional and well-optimized visual experiences.' },
+};
+
+export const ProcessSection = ({ language = 'es' }) => {
+  const steps = stepsByLanguage[language] || stepsByLanguage.es;
+  const t = labels[language] || labels.es;
   return (
-    <section className="py-24 md:py-32" data-testid="process-section">
+    <section id="process" className="py-24 md:py-32" data-testid="process-section">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -44,11 +59,11 @@ export const ProcessSection = () => {
           className="mb-12"
         >
           <h2 className="font-heading text-4xl md:text-5xl font-bold">
-            <span className="gradient-text">Cómo trabajo</span>
+            <span className="gradient-text">{t.title}</span>
           </h2>
           <div className="mt-3 h-1 w-24 bg-gradient-to-r from-primary to-secondary rounded-full" />
           <p className="mt-4 text-text-secondary max-w-lg">
-            Mi proceso está enfocado en crear experiencias visuales modernas, funcionales y bien optimizadas.
+            {t.subtitle}
           </p>
         </motion.div>
 
