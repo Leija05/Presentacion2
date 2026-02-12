@@ -5,6 +5,7 @@ import { AboutSection } from './components/AboutSection';
 import { SkillsSection } from './components/SkillsSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { ProcessSection } from './components/ProcessSection';
+import { ValueSection } from './components/ValueSection';
 import { Footer } from './components/Footer';
 import { Modal } from './components/Modal';
 import { ThemeToggle } from './components/ThemeToggle';
@@ -51,6 +52,7 @@ function App() {
         <AboutSection openModal={openModal} />
         <SkillsSection openModal={openModal} />
         <ProjectsSection openModal={openModal} />
+        <ValueSection />
         <ProcessSection />
       </main>
       

@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, FileText, Moon, Sun } from 'lucide-react';
 
+const links = [
+  { label: 'Sobre mí', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Proyectos', href: '#projects' },
+  { label: 'Valor', href: '#valor' },
+];
+
 export const Navbar = ({ theme, toggleTheme }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,7 +34,7 @@ export const Navbar = ({ theme, toggleTheme }) => {
       }`}
       data-testid="navbar"
     >
-      <div className="container-custom flex items-center justify-between">
+      <div className="container-custom flex items-center justify-between gap-4">
         <motion.a
           href="#"
           className="font-heading text-xl font-bold gradient-text"
@@ -36,6 +43,14 @@ export const Navbar = ({ theme, toggleTheme }) => {
         >
           HL
         </motion.a>
+
+        <div className="hidden lg:flex items-center gap-6 text-sm">
+          {links.map((link) => (
+            <a key={link.href} href={link.href} className="text-text-secondary hover:text-text-primary transition-colors">
+              {link.label}
+            </a>
+          ))}
+        </div>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-4">
@@ -71,7 +86,7 @@ export const Navbar = ({ theme, toggleTheme }) => {
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </motion.button>
-          
+
           <motion.button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-2.5 rounded-full glass"
@@ -89,8 +104,15 @@ export const Navbar = ({ theme, toggleTheme }) => {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden glass mt-3 mx-4 rounded-2xl p-4"
+          className="md:hidden glass mt-3 mx-4 rounded-2xl p-4 space-y-3"
         >
+          <div className="grid grid-cols-2 gap-2 text-sm">
+            {links.map((link) => (
+              <a key={link.href} href={link.href} className="py-2 px-3 rounded-lg bg-surface-highlight text-text-secondary">
+                {link.label}
+              </a>
+            ))}
+          </div>
           <button
             onClick={openCV}
             className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary text-white font-medium"

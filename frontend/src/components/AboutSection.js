@@ -40,11 +40,12 @@ const bentoCards = [
     gradient: 'from-pink-500/20 to-transparent',
   },
   {
-    id: '',
-    title: '',
-    icon: ,
+    id: 'perfil',
+    title: 'Perfil',
+    icon: Code,
     size: 'col-span-1 row-span-1',
-    gradient: 'from-pink-500/20 to-transparent',
+    gradient: 'from-indigo-500/20 to-transparent',
+    content: 'Front-end, Electron y aprendizaje continuo',
   },
 ];
 
@@ -132,6 +133,8 @@ const getModalContent = (type) => {
       return <MusicaModal />;
     case 'ubicacion':
       return <UbicacionModal />;
+    case 'perfil':
+      return <PerfilModal />;
     default:
       return null;
   }
@@ -242,6 +245,21 @@ const MusicaModal = () => (
         />
       ))}
     </div>
+  </div>
+);
+
+
+const PerfilModal = () => (
+  <div className="space-y-4" data-testid="perfil-modal"> 
+    <h3 className="font-heading text-2xl font-bold">Perfil profesional</h3>
+    <p className="text-text-secondary leading-relaxed">
+      Me enfoco en construir interfaces modernas, aplicaciones de escritorio con Electron y experiencias web responsivas.
+    </p>
+    <ul className="space-y-2 text-sm text-text-secondary">
+      <li>• Buenas prácticas de UI y estructura de componentes.</li>
+      <li>• Integración de APIs y manejo de datos en tiempo real.</li>
+      <li>• Mejora continua en rendimiento y accesibilidad.</li>
+    </ul>
   </div>
 );
 

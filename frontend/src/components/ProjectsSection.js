@@ -41,7 +41,7 @@ export const ProjectsSection = ({ openModal }) => {
   };
 
   return (
-    <section className="py-24 md:py-32" data-testid="projects-section">
+    <section id="projects" className="py-24 md:py-32" data-testid="projects-section">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
