@@ -196,6 +196,7 @@ export const HeroSection = ({ openModal, language = 'es' }) => {
               {/* Avatar Image */}
               <div className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden neon-glow">
                 <motion.img
+                /*src="https://i.imgur.com/XYiquMK.jpeg" */
                 /*src="https://i.imgur.com/LrU9xcA.jpeg" */
                   src="https://i.imgur.com/vyyvk3W.png"
                   alt="Hector Leija"
