@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X, FileText, Moon, Sun } from 'lucide-react';
+import { Menu, X, FileText, Moon, Sun, Languages } from 'lucide-react';
 
-const links = [
-  { label: 'Sobre mí', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Proyectos', href: '#projects' },
-  { label: 'Valor', href: '#valor' },
-];
+const content = {
+  es: {
+    links: [
+      { label: 'Sobre mí', href: '#about' },
+      { label: 'Skills', href: '#skills' },
+      { label: 'Proyectos', href: '#projects' },
+      { label: 'Proceso', href: '#process' },
+    ],
+    openCv: 'Abrir CV',
+  },
+  en: {
+    links: [
+      { label: 'About', href: '#about' },
+      { label: 'Skills', href: '#skills' },
+      { label: 'Projects', href: '#projects' },
+      { label: 'Process', href: '#process' },
+    ],
+    openCv: 'Open CV',
+  },
+};
 
-export const Navbar = ({ theme, toggleTheme }) => {
+export const Navbar = ({ theme, toggleTheme, language = 'es', toggleLanguage }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const t = content[language] || content.es;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,15 +60,25 @@ export const Navbar = ({ theme, toggleTheme }) => {
         </motion.a>
 
         <div className="hidden lg:flex items-center gap-6 text-sm">
-          {links.map((link) => (
+          {t.links.map((link) => (
             <a key={link.href} href={link.href} className="text-text-secondary hover:text-text-primary transition-colors">
               {link.label}
             </a>
           ))}
         </div>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-4">
+          <motion.button
+            onClick={toggleLanguage}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-full glass hover:bg-surface-highlight"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            data-testid="language-toggle"
+          >
+            <Languages size={16} />
+            <span className="text-sm font-medium uppercase">{language}</span>
+          </motion.button>
+
           <motion.button
             onClick={openCV}
             className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-white font-medium text-sm hover:shadow-lg transition-shadow duration-300"
@@ -62,7 +87,7 @@ export const Navbar = ({ theme, toggleTheme }) => {
             data-testid="cv-button"
           >
             <FileText size={18} />
-            <span>Abrir CV</span>
+            <span>{t.openCv}</span>
           </motion.button>
 
           <motion.button
@@ -76,8 +101,16 @@ export const Navbar = ({ theme, toggleTheme }) => {
           </motion.button>
         </div>
 
-        {/* Mobile Menu Button */}
         <div className="flex md:hidden items-center gap-3">
+          <motion.button
+            onClick={toggleLanguage}
+            className="p-2.5 rounded-full glass"
+            whileTap={{ scale: 0.9 }}
+            data-testid="language-toggle-mobile"
+          >
+            <Languages size={18} />
+          </motion.button>
+
           <motion.button
             onClick={toggleTheme}
             className="p-2.5 rounded-full glass"
@@ -98,7 +131,6 @@ export const Navbar = ({ theme, toggleTheme }) => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
@@ -107,7 +139,7 @@ export const Navbar = ({ theme, toggleTheme }) => {
           className="md:hidden glass mt-3 mx-4 rounded-2xl p-4 space-y-3"
         >
           <div className="grid grid-cols-2 gap-2 text-sm">
-            {links.map((link) => (
+            {t.links.map((link) => (
               <a key={link.href} href={link.href} className="py-2 px-3 rounded-lg bg-surface-highlight text-text-secondary">
                 {link.label}
               </a>
@@ -119,7 +151,7 @@ export const Navbar = ({ theme, toggleTheme }) => {
             data-testid="cv-button-mobile"
           >
             <FileText size={18} />
-            <span>Abrir CV</span>
+            <span>{t.openCv}</span>
           </button>
         </motion.div>
       )}

@@ -2,7 +2,43 @@ import React, { useState, useRef } from 'react';
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { Phone, ArrowDown, Sparkles } from 'lucide-react';
 
-export const HeroSection = ({ openModal }) => {
+const content = {
+  es: {
+    role: 'Desarrollador en Formación',
+    greeting: 'Hola, soy',
+    subtitle: 'Estudiante de Ingeniería en Sistemas · Construyendo el futuro línea por línea',
+    contact: 'Contáctame',
+    explore: 'Explorar',
+    modalTitle: 'Contacto',
+    instagram: 'Instagram',
+    discord: 'Discord',
+    discordCopied: 'Discord copiado al portapapeles',
+    online: 'En línea',
+    idle: 'Ausente',
+    dnd: 'No molestar',
+    offline: 'Desconectado',
+    noActivity: '💤 Sin actividad',
+  },
+  en: {
+    role: 'Developer in Progress',
+    greeting: "Hi, I'm",
+    subtitle: 'Systems Engineering Student · Building the future line by line',
+    contact: 'Contact me',
+    explore: 'Explore',
+    modalTitle: 'Contact',
+    instagram: 'Instagram',
+    discord: 'Discord',
+    discordCopied: 'Discord copied to clipboard',
+    online: 'Online',
+    idle: 'Idle',
+    dnd: 'Do not disturb',
+    offline: 'Offline',
+    noActivity: '💤 No activity',
+  },
+};
+
+export const HeroSection = ({ openModal, language = 'es' }) => {
+  const t = content[language] || content.es;
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef(null);
   
@@ -22,7 +58,7 @@ export const HeroSection = ({ openModal }) => {
   };
 
   const handleContactClick = () => {
-    openModal(<ContactModal />);
+    openModal(<ContactModal language={language} />);
   };
 
   const scrollToAbout = () => {
@@ -67,7 +103,7 @@ export const HeroSection = ({ openModal }) => {
               transition={{ delay: 0.2 }}
             >
               <Sparkles className="inline w-4 h-4 mr-2" />
-              Desarrollador en Formación
+              {t.role}
             </motion.p>
 
             <motion.h1
@@ -76,7 +112,7 @@ export const HeroSection = ({ openModal }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              Hola, soy{' '}
+              {t.greeting}{' '}
               <span className="gradient-text">Hector</span>
               <br />
               <span className="text-text-secondary">Leija</span>
@@ -88,7 +124,7 @@ export const HeroSection = ({ openModal }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Estudiante de Ingeniería en Sistemas · Construyendo el futuro línea por línea
+              {t.subtitle}
             </motion.p>
 
             <motion.div
@@ -105,7 +141,7 @@ export const HeroSection = ({ openModal }) => {
                 data-testid="hero-contact-button"
               >
                 <Phone size={20} />
-                <span>Contáctame</span>
+                <span>{t.contact}</span>
               </motion.button>
 
               <motion.button
@@ -115,7 +151,7 @@ export const HeroSection = ({ openModal }) => {
                 whileTap={{ scale: 0.95 }}
                 data-testid="hero-explore-button"
               >
-                <span>Explorar</span>
+                <span>{t.explore}</span>
                 <ArrowDown size={20} />
               </motion.button>
             </motion.div>
@@ -207,7 +243,8 @@ export const HeroSection = ({ openModal }) => {
 };
 
 // Contact Modal Content
-const ContactModal = () => {
+const ContactModal = ({ language = 'es' }) => {
+  const t = content[language] || content.es;
   const [discordProfile, setDiscordProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -233,7 +270,7 @@ const ContactModal = () => {
 
   const copyDiscord = () => {
     navigator.clipboard.writeText('_leija');
-    alert('Discord copiado al portapapeles');
+    alert(t.discordCopied);
   };
 
   const openInstagram = () => {
@@ -263,15 +300,15 @@ const ContactModal = () => {
   };
 
   const statusText = {
-    online: 'En línea',
-    idle: 'Ausente',
-    dnd: 'No molestar',
-    offline: 'Desconectado'
+    online: t.online,
+    idle: t.idle,
+    dnd: t.dnd,
+    offline: t.offline
   };
 
   return (
     <div className="space-y-5" data-testid="contact-modal">
-      <h3 className="font-heading text-2xl font-bold">Contacto</h3>
+      <h3 className="font-heading text-2xl font-bold">{t.modalTitle}</h3>
       
       {/* Social Links */}
       <div className="flex justify-center gap-5">
@@ -318,7 +355,7 @@ const ContactModal = () => {
 
       {/* Instagram - Premium Style */}
       <div>
-        <h4 className="font-semibold mb-3">Instagram</h4>
+        <h4 className="font-semibold mb-3">{t.instagram}</h4>
         <motion.div
           onClick={openInstagram}
           className="ig-premium relative flex items-center gap-4 p-4 rounded-[22px] cursor-pointer overflow-hidden"
@@ -371,7 +408,7 @@ const ContactModal = () => {
 
       {/* Discord - Premium Style */}
       <div>
-        <h4 className="font-semibold mb-3">Discord</h4>
+        <h4 className="font-semibold mb-3">{t.discord}</h4>
         {loading ? (
           <p className="text-text-secondary">Cargando perfil...</p>
         ) : discordProfile ? (
@@ -514,7 +551,7 @@ const ContactModal = () => {
             )}
             
             {!discordProfile.spotify && !discordProfile.activities?.find(a => a.type === 0) && (
-              <p className="relative z-10 mt-3 text-sm text-text-secondary opacity-80">💤 Sin actividad</p>
+              <p className="relative z-10 mt-3 text-sm text-text-secondary opacity-80">{t.noActivity}</p>
             )}
           </motion.div>
         ) : (

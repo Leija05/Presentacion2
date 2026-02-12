@@ -5,23 +5,25 @@ import { AboutSection } from './components/AboutSection';
 import { SkillsSection } from './components/SkillsSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { ProcessSection } from './components/ProcessSection';
-import { ValueSection } from './components/ValueSection';
 import { Footer } from './components/Footer';
 import { Modal } from './components/Modal';
-import { ThemeToggle } from './components/ThemeToggle';
 import { ScrollToTop } from './components/ScrollToTop';
 import { Navbar } from './components/Navbar';
 import './App.css';
 
 function App() {
   const [theme, setTheme] = useState('dark');
+  const [language, setLanguage] = useState('es');
   const [modalContent, setModalContent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'dark';
+    const savedLanguage = localStorage.getItem('language') || 'es';
     setTheme(savedTheme);
+    setLanguage(savedLanguage);
     document.documentElement.classList.toggle('light', savedTheme === 'light');
+    document.documentElement.lang = savedLanguage;
   }, []);
 
   const toggleTheme = () => {
@@ -29,6 +31,13 @@ function App() {
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.classList.toggle('light', newTheme === 'light');
+  };
+
+  const toggleLanguage = () => {
+    const newLanguage = language === 'es' ? 'en' : 'es';
+    setLanguage(newLanguage);
+    localStorage.setItem('language', newLanguage);
+    document.documentElement.lang = newLanguage;
   };
 
   const openModal = (content) => {
@@ -45,18 +54,22 @@ function App() {
     <div className="app" data-testid="app-container">
       <div className="grain-overlay" />
       
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <Navbar
+        theme={theme}
+        toggleTheme={toggleTheme}
+        language={language}
+        toggleLanguage={toggleLanguage}
+      />
       
       <main>
-        <HeroSection openModal={openModal} />
-        <AboutSection openModal={openModal} />
-        <SkillsSection openModal={openModal} />
-        <ProjectsSection openModal={openModal} />
-        <ValueSection />
-        <ProcessSection />
+        <HeroSection openModal={openModal} language={language} />
+        <AboutSection openModal={openModal} language={language} />
+        <SkillsSection openModal={openModal} language={language} />
+        <ProjectsSection openModal={openModal} language={language} />
+        <ProcessSection language={language} />
       </main>
       
-      <Footer />
+      <Footer language={language} />
       
       <ScrollToTop />
       

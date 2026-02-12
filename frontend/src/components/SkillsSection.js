@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const skills = [
+const skillsByLanguage = {
+  es: [
   {
     id: 'csharp',
     name: 'C#',
@@ -30,11 +31,50 @@ const skills = [
     description: 'Hace la página interactiva: botones, animaciones, ventanas y lógica.',
     level: 88,
   },
-];
+  ],
+  en: [
+    {
+      id: 'csharp',
+      name: 'C#',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-plain.svg',
+      description: 'Object-oriented language for desktop, web and game apps with .NET.',
+      level: 85,
+    },
+    {
+      id: 'html',
+      name: 'HTML',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-plain.svg',
+      description: 'Language that structures web pages with titles, text, images and sections.',
+      level: 95,
+    },
+    {
+      id: 'css',
+      name: 'CSS',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-plain.svg',
+      description: 'Handles design: colors, sizes, animations and visual styles.',
+      level: 90,
+    },
+    {
+      id: 'javascript',
+      name: 'JavaScript',
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg',
+      description: 'Makes pages interactive with buttons, animations and logic.',
+      level: 88,
+    },
+  ],
+};
 
-export const SkillsSection = ({ openModal }) => {
+const labels = {
+  es: { title: 'Lo que domino', level: 'Nivel de dominio' },
+  en: { title: 'What I master', level: 'Skill level' },
+};
+
+export const SkillsSection = ({ openModal, language = 'es' }) => {
+  const skills = skillsByLanguage[language] || skillsByLanguage.es;
+  const t = labels[language] || labels.es;
+
   const handleSkillClick = (skill) => {
-    openModal(<SkillModal skill={skill} />);
+    openModal(<SkillModal skill={skill} language={language} />);
   };
 
   return (
@@ -47,7 +87,7 @@ export const SkillsSection = ({ openModal }) => {
           className="mb-12"
         >
           <h2 className="font-heading text-4xl md:text-5xl font-bold">
-            <span className="gradient-text">Lo que domino</span>
+            <span className="gradient-text">{t.title}</span>
           </h2>
           <div className="mt-3 h-1 w-24 bg-gradient-to-r from-primary to-secondary rounded-full" />
         </motion.div>
@@ -108,7 +148,8 @@ export const SkillsSection = ({ openModal }) => {
   );
 };
 
-const SkillModal = ({ skill }) => (
+const SkillModal = ({ skill, language = 'es' }) => (
+
   <div className="text-center space-y-4" data-testid={`skill-modal-${skill.id}`}>
     <motion.img
       src={skill.icon}
@@ -122,7 +163,7 @@ const SkillModal = ({ skill }) => (
     
     <div className="pt-4">
       <div className="flex justify-between text-sm mb-2">
-        <span className="text-text-secondary">Nivel de dominio</span>
+        <span className="text-text-secondary">{(labels[language] || labels.es).level}</span>
         <span className="text-primary font-semibold">{skill.level}%</span>
       </div>
       <div className="w-full h-3 rounded-full bg-surface-highlight overflow-hidden">
