@@ -2,36 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, FileText, Moon, Sun, Languages } from 'lucide-react';
 
-const content = {
-  es: {
-    links: [
-      { label: 'Sobre mí', href: '#about' },
-      { label: 'Skills', href: '#skills' },
-      { label: 'Proyectos', href: '#projects' },
-      { label: 'Proceso', href: '#process' },
-    ],
-    openCv: 'Abrir CV',
-  },
-  en: {
-    links: [
-      { label: 'About', href: '#about' },
-      { label: 'Skills', href: '#skills' },
-      { label: 'Projects', href: '#projects' },
-      { label: 'Process', href: '#process' },
-    ],
-    openCv: 'Open CV',
-  },
-};
-
 export const Navbar = ({ theme, toggleTheme, language = 'es', toggleLanguage }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const t = content[language] || content.es;
+
+  const isEnglish = language === 'en';
+  const linkAbout = isEnglish ? 'About' : 'Sobre mí';
+  const linkSkills = 'Skills';
+  const linkProjects = isEnglish ? 'Projects' : 'Proyectos';
+  const linkProcess = isEnglish ? 'Process' : 'Proceso';
+  const openCvLabel = isEnglish ? 'Open CV' : 'Abrir CV';
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -60,11 +46,18 @@ export const Navbar = ({ theme, toggleTheme, language = 'es', toggleLanguage }) 
         </motion.a>
 
         <div className="hidden lg:flex items-center gap-6 text-sm">
-          {t.links.map((link) => (
-            <a key={link.href} href={link.href} className="text-text-secondary hover:text-text-primary transition-colors">
-              {link.label}
-            </a>
-          ))}
+          <a href="#about" className="text-text-secondary hover:text-text-primary transition-colors">
+            {linkAbout}
+          </a>
+          <a href="#skills" className="text-text-secondary hover:text-text-primary transition-colors">
+            {linkSkills}
+          </a>
+          <a href="#projects" className="text-text-secondary hover:text-text-primary transition-colors">
+            {linkProjects}
+          </a>
+          <a href="#process" className="text-text-secondary hover:text-text-primary transition-colors">
+            {linkProcess}
+          </a>
         </div>
 
         <div className="hidden md:flex items-center gap-4">
@@ -87,7 +80,7 @@ export const Navbar = ({ theme, toggleTheme, language = 'es', toggleLanguage }) 
             data-testid="cv-button"
           >
             <FileText size={18} />
-            <span>{t.openCv}</span>
+            <span>{openCvLabel}</span>
           </motion.button>
 
           <motion.button
@@ -139,11 +132,18 @@ export const Navbar = ({ theme, toggleTheme, language = 'es', toggleLanguage }) 
           className="md:hidden glass mt-3 mx-4 rounded-2xl p-4 space-y-3"
         >
           <div className="grid grid-cols-2 gap-2 text-sm">
-            {t.links.map((link) => (
-              <a key={link.href} href={link.href} className="py-2 px-3 rounded-lg bg-surface-highlight text-text-secondary">
-                {link.label}
-              </a>
-            ))}
+            <a href="#about" className="py-2 px-3 rounded-lg bg-surface-highlight text-text-secondary">
+              {linkAbout}
+            </a>
+            <a href="#skills" className="py-2 px-3 rounded-lg bg-surface-highlight text-text-secondary">
+              {linkSkills}
+            </a>
+            <a href="#projects" className="py-2 px-3 rounded-lg bg-surface-highlight text-text-secondary">
+              {linkProjects}
+            </a>
+            <a href="#process" className="py-2 px-3 rounded-lg bg-surface-highlight text-text-secondary">
+              {linkProcess}
+            </a>
           </div>
           <button
             onClick={openCV}
@@ -151,7 +151,7 @@ export const Navbar = ({ theme, toggleTheme, language = 'es', toggleLanguage }) 
             data-testid="cv-button-mobile"
           >
             <FileText size={18} />
-            <span>{t.openCv}</span>
+            <span>{openCvLabel}</span>
           </button>
         </motion.div>
       )}
